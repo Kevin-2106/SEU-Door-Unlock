@@ -1,0 +1,8 @@
+name: Probe Xcode
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: macos-15
+    steps:
+      - run: ls /Applications | grep -i Xcode
+      - run: for d in /Applications/Xcode*.app; do echo "== $d =="; "$d/Contents/Developer/usr/bin/xcodebuild" -version; "$d/Contents/Developer/usr/bin/xcodebuild" -showsdks 2>&1 | grep -i ios; done
